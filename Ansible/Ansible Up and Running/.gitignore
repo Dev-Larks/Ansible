@@ -1,12 +1,1 @@
-playbooks/.vagrant/bundler/global.sol
-playbooks/.vagrant/machines/default/libvirt/action_provision
-playbooks/.vagrant/machines/default/libvirt/box_meta
-playbooks/.vagrant/machines/default/libvirt/created_networks
-playbooks/.vagrant/machines/default/libvirt/creator_uid
-playbooks/.vagrant/machines/default/libvirt/id
-playbooks/.vagrant/machines/default/libvirt/index_uuid
-playbooks/.vagrant/machines/default/libvirt/private_key
-playbooks/.vagrant/machines/default/libvirt/synced_folders
-playbooks/.vagrant/machines/default/libvirt/vagrant_cwd
-playbooks/.vagrant/rgloader/loader.rb
-
+playbooks/.vagrant/*
