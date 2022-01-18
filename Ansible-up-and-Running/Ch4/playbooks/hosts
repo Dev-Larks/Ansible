@@ -1,0 +1,2 @@
+[webservers]
+server1 ansible_host=192.168.121.106 ansible_port=22
