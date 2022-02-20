@@ -13,15 +13,24 @@ Vagrant.configure("2") do |config|
     vagrant1.vm.box = "generic/ubuntu2004"
     vagrant1.vm.network "forwarded_port", guest: 80, host: 8080
     vagrant1.vm.network "forwarded_port", guest: 443, host: 8443
+    vagrant1.vm.provider :libvirt do |domain|
+      domain.management_network_mac = "52:54:00:00:01:01"
+    end
   end
   config.vm.define "vagrant2" do |vagrant2|
     vagrant2.vm.box = "generic/ubuntu2004"
     vagrant2.vm.network "forwarded_port", guest: 80, host: 8081
     vagrant2.vm.network "forwarded_port", guest: 443, host: 8444
+    vagrant2.vm.provider :libvirt do |domain|
+      domain.management_network_mac = "52:54:00:00:01:02"
+    end
   end
   config.vm.define "vagrant3" do |vagrant3|
     vagrant3.vm.box = "generic/ubuntu2004"
     vagrant3.vm.network "forwarded_port", guest: 80, host: 8082
     vagrant3.vm.network "forwarded_port", guest: 443, host: 8445
+    vagrant3.vm.provider :libvirt do |domain|
+      domain.management_network_mac = "52:54:00:00:01:03"
+    end
   end
 end
