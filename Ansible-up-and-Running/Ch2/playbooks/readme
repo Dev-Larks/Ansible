@@ -1,0 +1,39 @@
+==Chapter 2 notes==
+
+Playbooks are introduced
+A playbook is a list of plays (dictionaries)
+Every play must contain:
+* A set of hosts to configure
+* A list of tasks to be executed
+
+web-notls.yml
+This playbook configures an nginx server that supports http only
+This playbook requires a 'files' directory be present which contains the nginx.conf file.
+A second directory called 'templates' is also required to hold the custom webserver index.html template
+The hosts file is modified by creating a [webservers] group which contains the Vagrant testserver
+* confirm if hosts file needs to be updated with correct IP address details.
+
+ansible webservers -m ping
+
+ansible-playbook web-notls.yml
+
+When the playbook completes you should be able to access the webserver at http://localhost:8080
+
+
+web-tls.yml
+This playbook configures a nginx server that supports https
+
+A TLS certificate is generated using the below command:
+$ openssl req -x509 -nodes -days 3650 -newkey rsa:2048 \
+    -subj /CN=localhost \
+    -keyout files/nginx.key -out files/nginx.crt
+
+This generates the nginx.key and nginx.crt files which are created in the files directory
+
+It also uses variables to hold the locations that the files need to be placed in.
+
+An additional nginx.conf.j2 template file is used to define where to place the .crt and .key files
+
+ansible-playbook web-tls.yml
+
+When the playbook completes you should be able to access the webserver at https://localhost:8443

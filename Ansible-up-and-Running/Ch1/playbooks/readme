@@ -1,0 +1,21 @@
+==Chapter 1 notes==
+
+Command to connect to the VM using commandline.
+ssh vagrant@192.168.121.144 -p 22 -i /home/craig/Dev/Ansible/Ansible-up-and-Running/Ch1/playbooks/.vagrant/machines/default/libvirt/private_key
+
+Hosts file initial information
+testserver ansible_host=192.168.121.144 ansible_port=22 ansible_user=vagrant ansible_private_key_file=.vagrant/machines/default/libvirt/private_key
+
+Reconfigured Hosts file once an ansible.cfg file has been created.
+testserver ansible_host=192.168.121.144 ansible_port=22
+
+
+
+Adhoc commands
+ansible testserver -i hosts -m ping
+ansible testserver -m command -a uptime
+ansible testserver -a "tail /var/log/dmesg"
+ansible testserver -b -a "tail /var/log/syslog"
+ansible testserver -b -m apt -a name=nginx
+ansible testserver -b -m service -a "name=nginx state=restarted"
+

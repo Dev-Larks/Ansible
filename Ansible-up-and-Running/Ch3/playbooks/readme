@@ -1,0 +1,36 @@
+==Chapter 3: Inventory==
+
+The inventory file can be called any name but needs to be referenced in the ansible.cfg file.
+
+You can group servers in the inventory file by environment, function or other metric
+
+[vagrant]
+vagrant1 ansible_host=127.0.0.1 ansible_port=2222
+vagrant2 ansible_host=127.0.0.1 ansible_port=2200
+vagrant3 ansible_host=127.0.0.1 ansible_port=2201
+
+[web]
+vagrant1
+
+[task]
+vagrant2
+
+[db]
+vagrant3
+
+
+You can explicitly reference the local machine by adding an entry in the inventory file in this format.
+localhost ansible_connection=local
+
+This chapter uses Vagrant to create 3x VMs
+
+ansible vagrant2 -a "ip addr show dev eth0"
+
+ansible all -a "date"
+
+An inventory file can have both host and group variables defined in it however, best practice is to keep these separate and use host_vars and group_vars directories to contain this information.
+
+Dynamic Inventory
+sudo pip install paramiko
+
+I could not get the dynamic inventory file to work has str and byte errors.
