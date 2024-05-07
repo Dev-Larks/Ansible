@@ -5,21 +5,16 @@
 # configures the configuration version (we support older styles for
 # backwards compatibility). Please don't change it unless you know what
 # you're doing.
-
 Vagrant.configure("2") do |config|
-  
-  config.vm.define "testserver" do |node|
-    node.vm.hostname = "testserver01"
-    node.vm.box = "generic/rocky8"
+  config.vm.box = "generic/rocky8"
+  config.vm.hostname = "lawarra01"
 
-    # Provider specific configuration
-    node.vm.provider :libvirt do |domain|
-      domain.management_network_mac = "52:54:00:00:01:01"
-    
-      # Provisioning configuration for Ansible.
-        config.vm.provision "ansible" do |ansible|
-        ansible.playbook = "playbook.yml"
-      end
-    end
+    # Provider-specific configuration
+  config.vm.provider :libvirt do |lv|
+    lv.management_network_mac = "52:54:00:00:01:01"
+  end
+  
+  config.vm.provision "ansible" do |ansible|
+    ansible.playbook = "playbook.yml"
   end  
 end
