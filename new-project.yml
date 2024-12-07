@@ -1,0 +1,37 @@
+---
+# Playbook to setup folder structure for a new project
+
+- name: Prompt for Project / Foldername
+  hosts: localhost
+  vars:
+    - directory: /home/craig/dev/Ansible
+
+  vars_prompt:
+
+    - name: project
+      prompt: Name of Project "Ansible-for-DevOps", "become-ansible"
+      private: no
+
+    - name: chapter
+      prompt: Enter chapter number
+      private: no
+
+  tasks:
+
+  - name: Create playbook directory
+    file:
+      path: "{{ directory }}/{{ project }}/{{ chapter }}/playbooks"
+      state: directory
+    delegate_to: localhost
+
+  - name: Copy ansible.cfg template
+    copy:
+      src: "{{ directory }}/ansible.cfg"
+      dest: "{{ directory }}/{{ project }}/{{ chapter }}/playbooks/ansible.cfg"
+    delegate_to: localhost
+
+  - name: Copy  hosts file template
+    copy:
+      src: "{{ directory }}/hosts"
+      dest: "{{ directory}}/{{ project }}/{{ chapter }}/playbooks/hosts"
+    delegate_to: localhost
