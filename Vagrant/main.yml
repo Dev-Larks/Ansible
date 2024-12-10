@@ -1,0 +1,21 @@
+---
+- hosts: localhost
+  become: yes
+
+  tasks:
+    - name: "Map /files location"
+      mount:
+        path: /files
+        src: /dev/nvme0n1p3
+        fstype: ext4
+        state: mounted
+
+    - name: "Check Vagrant-Libvirt network active"
+      virt_net:
+        state: active
+        name: vagrant-libvirt
+
+    - name: "Start Default Pool"
+      virt_pool:
+        state: active
+        name: default
