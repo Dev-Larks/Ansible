@@ -1,0 +1,20 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.box = "generic/ubuntu2004"
+  config.vm.hostname = "drupal.test"
+  config.ssh.insert_key = false
+
+  config.vm.provider :libvirt do |lv|
+    lv.memory = 2048
+    lv.management_network_mac = "52:54:00:00:01:01"
+  end
+
+  # Ansible provisioning.
+  config.vm.provision "ansible" do |ansible|
+    ansible.playbook = "playbook2.yml"
+  end
+end
